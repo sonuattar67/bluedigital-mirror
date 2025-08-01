@@ -26,7 +26,7 @@ const ServicesSection = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Growing your Revenue using{" "}
             <span className="text-primary">Blue Services</span>
@@ -40,12 +40,13 @@ const ServicesSection = () => {
             return (
               <div
                 key={index}
-                className="group text-center lg:text-left space-y-6 p-8 rounded-2xl hover:bg-gradient-subtle transition-all duration-300 hover:shadow-medium"
+                className="group text-center lg:text-left space-y-6 p-8 rounded-2xl hover:bg-gradient-subtle transition-all duration-500 hover:shadow-medium hover:scale-105 animate-fade-in-up"
+                style={{animationDelay: `${index * 0.2}s`}}
               >
                 {/* Icon */}
                 <div className="flex justify-center lg:justify-start">
-                  <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <IconComponent className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-soft group-hover:shadow-medium">
+                    <IconComponent className="w-8 h-8 text-white group-hover:animate-pulse" />
                   </div>
                 </div>
 
@@ -60,7 +61,7 @@ const ServicesSection = () => {
                     </h4>
                   </div>
                   
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
                     {service.description}
                   </p>
                 </div>
@@ -70,13 +71,13 @@ const ServicesSection = () => {
         </div>
 
         {/* Bottom Illustration */}
-        <div className="mt-16 flex justify-center">
-          <div className="w-full max-w-md h-64 bg-gradient-subtle rounded-2xl flex items-center justify-center">
+        <div className="mt-16 flex justify-center animate-bounce-in" style={{animationDelay: '0.8s'}}>
+          <div className="w-full max-w-md h-64 bg-gradient-subtle rounded-2xl flex items-center justify-center hover:scale-105 transition-all duration-300 shadow-soft hover:shadow-medium">
             <div className="text-center space-y-4">
-              <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                <div className="w-12 h-12 bg-primary rounded-full"></div>
+              <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto animate-pulse-scale">
+                <div className="w-12 h-12 bg-primary rounded-full animate-float"></div>
               </div>
-              <p className="text-muted-foreground text-sm">Services Illustration</p>
+              <p className="text-muted-foreground text-sm font-medium">Services Ecosystem</p>
             </div>
           </div>
         </div>

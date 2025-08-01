@@ -1,10 +1,14 @@
+import { useInView } from "@/hooks/useInView";
+
 const MarketingSection = () => {
+  const [sectionRef, isInView] = useInView({ threshold: 0.1 });
+
   return (
-    <section className="py-20 bg-gradient-subtle">
+    <section ref={sectionRef} className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
-          <div className="space-y-8">
+          <div className={`space-y-8 transition-all duration-1000 ${isInView ? 'animate-slide-in-left' : 'opacity-0 -translate-x-10'}`}>
             <div className="space-y-6">
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
                 Digital Alchemy:{" "}
@@ -34,19 +38,19 @@ const MarketingSection = () => {
           </div>
 
           {/* Image/Illustration */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-strong">
+          <div className={`relative transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-right' : 'opacity-0 translate-x-10'}`}>
+            <div className="relative rounded-2xl overflow-hidden shadow-strong hover:scale-105 transition-all duration-500">
               <img
                 src="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=600&h=400&fit=crop"
                 alt="Digital Marketing Illustration"
                 className="w-full h-auto object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-hero/10"></div>
+              <div className="absolute inset-0 bg-gradient-hero/10 hover:bg-gradient-hero/20 transition-all duration-300"></div>
             </div>
             
             {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent/20 rounded-full blur-xl"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+            <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent/20 rounded-full blur-xl animate-float"></div>
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl animate-pulse-scale"></div>
           </div>
         </div>
       </div>

@@ -76,7 +76,7 @@ const TestimonialsSection = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6">
         {/* Navigation */}
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex items-center justify-between mb-12 animate-fade-in">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
             What Our Clients Say
           </h2>
@@ -84,13 +84,13 @@ const TestimonialsSection = () => {
           <div className="flex gap-4">
             <button
               onClick={prevSlide}
-              className="p-3 rounded-full border border-border hover:bg-primary hover:text-white transition-all duration-300"
+              className="p-3 rounded-full border border-border hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-medium"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextSlide}
-              className="p-3 rounded-full border border-border hover:bg-primary hover:text-white transition-all duration-300"
+              className="p-3 rounded-full border border-border hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-medium"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -99,17 +99,18 @@ const TestimonialsSection = () => {
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {visibleTestimonials.map((testimonial) => (
+          {visibleTestimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="bg-gradient-subtle p-8 rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105"
+              className="bg-gradient-subtle p-8 rounded-2xl shadow-soft hover:shadow-strong transition-all duration-500 hover:scale-105 animate-fade-in-up group"
+              style={{animationDelay: `${index * 0.1}s`}}
             >
               {/* Avatar and Info */}
               <div className="flex items-center gap-4 mb-6">
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-12 h-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
                 <div>
                   <h3 className="font-semibold text-foreground">
@@ -122,7 +123,7 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-muted-foreground leading-relaxed">
+              <blockquote className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
                 "{testimonial.content}"
               </blockquote>
             </div>
@@ -130,14 +131,14 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center mt-8 gap-2">
+        <div className="flex justify-center mt-8 gap-2 animate-fade-in" style={{animationDelay: '0.6s'}}>
           {Array.from({ length: Math.ceil(testimonials.length / visibleCount) }).map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index * visibleCount)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 ${
                 Math.floor(currentIndex / visibleCount) === index
-                  ? "bg-primary"
+                  ? "bg-primary animate-pulse-scale"
                   : "bg-muted hover:bg-primary/50"
               }`}
             />

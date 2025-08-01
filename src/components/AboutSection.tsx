@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useInView } from "@/hooks/useInView";
 
 const stats = [
   { number: "28+", label: "Business we helped to grow" },
@@ -8,12 +9,14 @@ const stats = [
 ];
 
 const AboutSection = () => {
+  const [sectionRef, isInView] = useInView({ threshold: 0.1 });
+
   return (
-    <section className="py-20 bg-gradient-subtle">
+    <section ref={sectionRef} className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
-          <div className="space-y-8">
+          <div className={`space-y-8 transition-all duration-1000 ${isInView ? 'animate-slide-in-left' : 'opacity-0 -translate-x-10'}`}>
             <div className="space-y-6">
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
                 Who we are?
@@ -38,17 +41,22 @@ const AboutSection = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 gap-8">
+          <div className={`grid grid-cols-2 gap-8 transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-right' : 'opacity-0 translate-x-10'}`}>
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="text-center p-6 bg-white rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105"
+                className={`text-center p-6 bg-white rounded-2xl shadow-soft hover:shadow-medium transition-all duration-500 hover:scale-105 group ${
+                  isInView ? 'animate-bounce-in' : 'opacity-0'
+                }`}
+                style={{
+                  animationDelay: isInView ? `${(index + 1) * 150}ms` : '0ms'
+                }}
               >
                 <div className="space-y-2">
-                  <div className="text-3xl lg:text-4xl font-bold text-primary">
+                  <div className="text-3xl lg:text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
                     {stat.number}
                   </div>
-                  <div className="text-sm lg:text-base text-muted-foreground">
+                  <div className="text-sm lg:text-base text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                     {stat.label}
                   </div>
                 </div>
@@ -58,7 +66,7 @@ const AboutSection = () => {
         </div>
 
         {/* Purpose Section */}
-        <div className="mt-20 text-center space-y-8">
+        <div className={`mt-20 text-center space-y-8 transition-all duration-1000 delay-500 ${isInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
           <div className="space-y-4">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
               Our PURPOSE is to meet your PURPOSE
